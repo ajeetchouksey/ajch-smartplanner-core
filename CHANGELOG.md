@@ -1,4 +1,20 @@
 # Changelog
+[2.1.0] - 2025-08-05
+### Added
+- AI-powered footer component with neural network SVG animations, glassmorphism effects, and responsive design
+- Modern theme system with neural, cyber, and glassmorphism color palettes
+- Enhanced theme controller with prominent light/dark mode toggle and smooth animations
+
+### Changed
+- Updated typography and font stacks for modern technical aesthetics
+- Improved visual effects and transitions across the UI library
+
+### Removed
+- Deprecated Button component (moved/removed as part of refactor)
+
+---
+
+See previous releases for earlier changes.
 
 All notable changes to the SmartPlanner Core project will be documented in this file.
 
