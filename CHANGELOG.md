@@ -7,20 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2025-08-05
+
 ### Added
-- Initial monorepo structure for SmartPlanner platform
-- Comprehensive documentation for all shared services
+- Comprehensive documentation system (CHANGELOG.md, COPILOT_INSTRUCTIONS.md)
 - Vite-based component development playground for UI library
 - Enhanced Button component with multiple variants (primary, secondary, disabled)
 - App-specific documentation structure for Travel and Finance planners
 - Infrastructure planning documentation with Azure services
 - Complete project architecture with shared services design
+- Proper .gitignore for Node.js projects
+- Organized UI library structure within src/ directory
 
 ### Changed
-- Replaced Storybook with Vite-based component development environment
+- **BREAKING CHANGE:** Replaced Storybook with Vite-based component development environment
 - Reorganized documentation structure for better maintainability
 - Updated README.md with comprehensive project overview
 - Moved app-specific documentation to respective app folders
+- Fixed import paths and file organization for proper module resolution
+- Updated package.json version to 2.0.0
 
 ### Removed
 - All Storybook-related configurations and dependencies
