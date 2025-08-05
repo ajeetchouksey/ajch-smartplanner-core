@@ -1,4 +1,4 @@
-#Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)
+# Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)
 ## **Copyright (c) 2025 Ajeet Kumar Chouksey**
 
 Permission is hereby granted to any person obtaining a copy of this software and associated documentation files (the "Software"), to use, copy, modify, and distribute the Software for non-commercial purposes only, subject to the following conditions:
