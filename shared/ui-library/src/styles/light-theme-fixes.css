@@ -1,0 +1,302 @@
+/* Light Theme UI/UX Fixes - Comprehensive Light Mode Support */
+
+/* Light Mode Button Improvements */
+[data-color-mode="light"] .ai-button {
+  color: #374151 !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-color-mode="light"] .ai-button:hover {
+  background: rgba(255, 255, 255, 1) !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  color: #1f2937 !important;
+}
+
+/* Light Mode Theme Toggle Button */
+[data-color-mode="light"] .theme-toggle-button {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
+  color: white !important;
+  border: 1px solid #2563eb !important;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
+}
+
+[data-color-mode="light"] .theme-toggle-button:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%) !important;
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4) !important;
+}
+
+/* Light Mode Theme Style Buttons */
+[data-color-mode="light"] .theme-style-button {
+  color: #4b5563 !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-color-mode="light"] .theme-style-button:hover {
+  color: #1f2937 !important;
+  background: rgba(255, 255, 255, 1) !important;
+  border-color: rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+[data-color-mode="light"] .theme-style-button.active {
+  color: white !important;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
+  border-color: #2563eb !important;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
+}
+
+/* Light Mode Navigation and Header */
+[data-color-mode="light"] .header {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+  backdrop-filter: blur(20px) !important;
+}
+
+[data-color-mode="light"] .brand-title {
+  color: #111827 !important;
+}
+
+[data-color-mode="light"] .brand-subtitle {
+  color: #6b7280 !important;
+}
+
+[data-color-mode="light"] .header-nav .nav-item {
+  color: #374151 !important;
+  background: transparent !important;
+}
+
+[data-color-mode="light"] .header-nav .nav-item:hover {
+  color: #111827 !important;
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-color-mode="light"] .action-btn {
+  color: #6b7280 !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-color-mode="light"] .action-btn:hover {
+  color: #111827 !important;
+  background: rgba(255, 255, 255, 1) !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+[data-color-mode="light"] .cta-btn {
+  color: white !important;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
+  border: none !important;
+}
+
+[data-color-mode="light"] .cta-btn:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%) !important;
+}
+
+/* Light Mode Search Input */
+[data-color-mode="light"] .search-input {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+  color: #111827 !important;
+}
+
+[data-color-mode="light"] .search-input::placeholder {
+  color: #9ca3af !important;
+}
+
+[data-color-mode="light"] .search-input:focus {
+  background: white !important;
+  border-color: #3b82f6 !important;
+}
+
+[data-color-mode="light"] .search-icon {
+  color: #6b7280 !important;
+}
+
+/* Light Mode User Profile */
+[data-color-mode="light"] .user-avatar {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-color-mode="light"] .user-avatar .user-initials {
+  color: #3b82f6 !important;
+}
+
+[data-color-mode="light"] .user-info .user-name {
+  color: #111827 !important;
+}
+
+[data-color-mode="light"] .user-info .user-role {
+  color: #6b7280 !important;
+}
+
+/* Light Mode Cards and Components */
+[data-color-mode="light"] .ai-card {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+[data-color-mode="light"] .glassmorphism {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Light Mode Text and Typography */
+[data-color-mode="light"] .ai-heading {
+  color: #111827 !important;
+}
+
+[data-color-mode="light"] .ai-text-gradient {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* Light Mode Theme Controller */
+[data-color-mode="light"] .theme-mode-display {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+  color: #374151 !important;
+}
+
+/* Light Mode Component Navigation */
+[data-color-mode="light"] .component-nav {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-color-mode="light"] .nav-item {
+  color: #6b7280 !important;
+  background: rgba(255, 255, 255, 0.5) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-color-mode="light"] .nav-item:hover {
+  color: #111827 !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+[data-color-mode="light"] .nav-item.active {
+  color: white !important;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important;
+  border-color: #2563eb !important;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
+}
+
+/* Light Mode Component Display */
+[data-color-mode="light"] .component-display {
+  background: rgba(248, 249, 250, 0.5) !important;
+}
+
+/* Light Mode Mobile Navigation */
+[data-color-mode="light"] .mobile-nav-item {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: #374151 !important;
+}
+
+[data-color-mode="light"] .mobile-nav-item:hover {
+  background: rgba(255, 255, 255, 1) !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+  color: #111827 !important;
+}
+
+[data-color-mode="light"] .mobile-nav-item.active {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important;
+  border-color: #2563eb !important;
+  color: white !important;
+}
+
+/* Light Mode Notification Badge */
+[data-color-mode="light"] .notification-badge {
+  background: #ef4444 !important;
+  border: 2px solid white !important;
+}
+
+/* Light Mode Theme Toggle */
+[data-color-mode="light"] .theme-toggle {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: #6b7280 !important;
+}
+
+[data-color-mode="light"] .theme-toggle:hover {
+  background: white !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+  color: #111827 !important;
+}
+
+/* Light Mode Focus States */
+[data-color-mode="light"] .nav-item:focus-visible,
+[data-color-mode="light"] .action-btn:focus-visible,
+[data-color-mode="light"] .theme-toggle:focus-visible,
+[data-color-mode="light"] .ai-button:focus-visible {
+  outline: 2px solid #3b82f6 !important;
+  outline-offset: 2px !important;
+}
+
+/* Light Mode High Contrast Support */
+@media (prefers-contrast: high) {
+  [data-color-mode="light"] .ai-button {
+    border: 2px solid #000 !important;
+    color: #000 !important;
+  }
+  
+  [data-color-mode="light"] .nav-item {
+    border: 2px solid #666 !important;
+  }
+  
+  [data-color-mode="light"] .ai-heading {
+    color: #000 !important;
+  }
+}
+
+/* Light Mode Footer */
+[data-color-mode="light"] .ai-footer {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-color-mode="light"] .footer-link {
+  color: #6b7280 !important;
+}
+
+[data-color-mode="light"] .footer-link:hover {
+  color: #111827 !important;
+}
+
+/* Ensure proper visibility in light mode */
+[data-color-mode="light"] * {
+  color: inherit;
+}
+
+[data-color-mode="light"] body {
+  color: #111827 !important;
+}
+
+/* Light Mode Animation Improvements */
+[data-color-mode="light"] .particle {
+  background: rgba(59, 130, 246, 0.3) !important;
+}
+
+[data-color-mode="light"] .neural-network-bg::before {
+  opacity: 0.3 !important;
+}
+
+/* Improved contrast for light theme buttons */
+[data-color-mode="light"] button {
+  font-weight: 500 !important;
+}
+
+[data-color-mode="light"] button:not(.theme-toggle-button):not(.theme-style-button.active) {
+  text-shadow: none !important;
+}

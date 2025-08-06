@@ -1,4 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import './App.css';
+import './styles/ai-modern.css';
+import './styles/light-theme-fixes.css';
 import { ThemeProvider, useTheme, AppTheme } from './themes/ThemeProvider'
 import {
   Button,
@@ -23,8 +26,6 @@ import {
   ToastType,
   Toast
 } from './components/atoms'
-import './App.css'
-import './styles/ai-modern.css'
 
 // Component showcase sections with AI styling
 const ComponentSection: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => {

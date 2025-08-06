@@ -106,11 +106,22 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
         };
       case 'secondary':
         return {
-          backgroundColor: theme.colors.secondary[100],
-          color: theme.colors.secondary[900],
-          border: `1px solid ${theme.colors.secondary[300]}`,
+          backgroundColor: theme.colorMode === 'light' 
+            ? theme.colors.neutral[100] 
+            : theme.colors.secondary[100],
+          color: theme.colorMode === 'light' 
+            ? theme.colors.neutral[700] 
+            : theme.colors.secondary[900],
+          border: `1px solid ${theme.colorMode === 'light' 
+            ? theme.colors.neutral[300] 
+            : theme.colors.secondary[300]}`,
           ':hover': {
-            backgroundColor: theme.colors.secondary[200],
+            backgroundColor: theme.colorMode === 'light' 
+              ? theme.colors.neutral[200] 
+              : theme.colors.secondary[200],
+            color: theme.colorMode === 'light' 
+              ? theme.colors.neutral[900] 
+              : theme.colors.secondary[900],
           },
         };
       case 'outline':
@@ -119,7 +130,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
           color: primaryColor,
           border: `1px solid ${primaryColor}`,
           ':hover': {
-            backgroundColor: theme.colors.primary[50],
+            backgroundColor: theme.colorMode === 'light' 
+              ? theme.colors.primary[50] 
+              : theme.colors.primary[50],
+            color: theme.colorMode === 'light' 
+              ? theme.colors.primary[700] 
+              : primaryColor,
           },
         };
       case 'ghost':
@@ -128,7 +144,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
           color: primaryColor,
           border: 'none',
           ':hover': {
-            backgroundColor: theme.colors.primary[50],
+            backgroundColor: theme.colorMode === 'light' 
+              ? theme.colors.neutral[100] 
+              : theme.colors.primary[50],
+            color: theme.colorMode === 'light' 
+              ? theme.colors.primary[700] 
+              : primaryColor,
           },
         };
       case 'danger':

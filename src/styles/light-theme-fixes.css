@@ -1,0 +1,289 @@
+/* Light Theme UI/UX Fixes for SmartPlanner App */
+
+/* OAuth Login Button Improvements for Light Mode */
+[data-color-mode="light"] .oauth-button {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+  color: #374151 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-color-mode="light"] .oauth-button:hover {
+  background: rgba(255, 255, 255, 1) !important;
+  border-color: rgba(0, 0, 0, 0.3) !important;
+  color: #111827 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Microsoft OAuth Button */
+[data-color-mode="light"] .oauth-button.microsoft {
+  background: #0078d4 !important;
+  color: white !important;
+  border-color: #106ebe !important;
+}
+
+[data-color-mode="light"] .oauth-button.microsoft:hover {
+  background: #106ebe !important;
+  color: white !important;
+}
+
+/* Google OAuth Button */
+[data-color-mode="light"] .oauth-button.google {
+  background: white !important;
+  color: #5f6368 !important;
+  border: 1px solid #dadce0 !important;
+}
+
+[data-color-mode="light"] .oauth-button.google:hover {
+  background: #f8f9fa !important;
+  border-color: #5f6368 !important;
+}
+
+/* Facebook OAuth Button */
+[data-color-mode="light"] .oauth-button.facebook {
+  background: #1877f2 !important;
+  color: white !important;
+  border-color: #166fe5 !important;
+}
+
+[data-color-mode="light"] .oauth-button.facebook:hover {
+  background: #166fe5 !important;
+  color: white !important;
+}
+
+/* OAuth Login Container */
+[data-color-mode="light"] .oauth-login-container {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+  color: #111827 !important;
+}
+
+[data-color-mode="light"] .oauth-login-title {
+  color: #111827 !important;
+}
+
+[data-color-mode="light"] .oauth-login-subtitle {
+  color: #6b7280 !important;
+}
+
+/* Dashboard Components Light Mode */
+[data-color-mode="light"] .dashboard-card {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  color: #111827 !important;
+}
+
+[data-color-mode="light"] .dashboard-title {
+  color: #111827 !important;
+}
+
+[data-color-mode="light"] .dashboard-subtitle {
+  color: #6b7280 !important;
+}
+
+/* App Background for Light Mode */
+[data-color-mode="light"] .smartplanner-app {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%) !important;
+  color: #111827 !important;
+}
+
+/* Loading State for Light Mode */
+[data-color-mode="light"] .loading-container {
+  background: rgba(255, 255, 255, 0.95) !important;
+  color: #111827 !important;
+}
+
+[data-color-mode="light"] .loading-text {
+  color: #6b7280 !important;
+}
+
+/* Error State for Light Mode */
+[data-color-mode="light"] .error-container {
+  background: rgba(254, 242, 242, 0.95) !important;
+  border: 1px solid rgba(252, 165, 165, 0.5) !important;
+  color: #991b1b !important;
+}
+
+[data-color-mode="light"] .error-title {
+  color: #dc2626 !important;
+}
+
+[data-color-mode="light"] .error-message {
+  color: #7f1d1d !important;
+}
+
+/* Welcome Message Light Mode */
+[data-color-mode="light"] .welcome-message {
+  color: #111827 !important;
+}
+
+[data-color-mode="light"] .user-email {
+  color: #6b7280 !important;
+}
+
+/* Button Overrides for SmartPlanner App */
+[data-color-mode="light"] .btn-primary {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
+}
+
+[data-color-mode="light"] .btn-primary:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%) !important;
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4) !important;
+}
+
+[data-color-mode="light"] .btn-secondary {
+  background: rgba(255, 255, 255, 0.9) !important;
+  color: #374151 !important;
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-color-mode="light"] .btn-secondary:hover {
+  background: rgba(255, 255, 255, 1) !important;
+  color: #111827 !important;
+  border-color: rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Navigation Light Mode */
+[data-color-mode="light"] .navigation-item {
+  color: #6b7280 !important;
+  background: rgba(255, 255, 255, 0.5) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-color-mode="light"] .navigation-item:hover {
+  color: #111827 !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+[data-color-mode="light"] .navigation-item.active {
+  color: white !important;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important;
+  border-color: #2563eb !important;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
+}
+
+/* Modal Light Mode */
+[data-color-mode="light"] .modal-overlay {
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+
+[data-color-mode="light"] .modal-content {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+  color: #111827 !important;
+}
+
+[data-color-mode="light"] .modal-title {
+  color: #111827 !important;
+}
+
+[data-color-mode="light"] .modal-close {
+  color: #6b7280 !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-color-mode="light"] .modal-close:hover {
+  color: #111827 !important;
+  background: rgba(255, 255, 255, 1) !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Form Elements Light Mode */
+[data-color-mode="light"] .form-input {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+  color: #111827 !important;
+}
+
+[data-color-mode="light"] .form-input:focus {
+  background: white !important;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+[data-color-mode="light"] .form-input::placeholder {
+  color: #9ca3af !important;
+}
+
+[data-color-mode="light"] .form-label {
+  color: #374151 !important;
+}
+
+/* Glassmorphism Override for Light Mode */
+[data-color-mode="light"] .glassmorphism {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+}
+
+/* Typography Light Mode */
+[data-color-mode="light"] .text-primary {
+  color: #111827 !important;
+}
+
+[data-color-mode="light"] .text-secondary {
+  color: #6b7280 !important;
+}
+
+[data-color-mode="light"] .text-muted {
+  color: #9ca3af !important;
+}
+
+/* Sidebar Light Mode */
+[data-color-mode="light"] .sidebar {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-color-mode="light"] .sidebar-item {
+  color: #6b7280 !important;
+}
+
+[data-color-mode="light"] .sidebar-item:hover {
+  color: #111827 !important;
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-color-mode="light"] .sidebar-item.active {
+  color: #3b82f6 !important;
+  background: rgba(59, 130, 246, 0.1) !important;
+}
+
+/* Ensure text is readable */
+[data-color-mode="light"] * {
+  text-shadow: none !important;
+}
+
+/* Focus states for accessibility */
+[data-color-mode="light"] *:focus-visible {
+  outline: 2px solid #3b82f6 !important;
+  outline-offset: 2px !important;
+}
+
+/* High contrast mode for light theme */
+@media (prefers-contrast: high) {
+  [data-color-mode="light"] .oauth-button,
+  [data-color-mode="light"] .btn-primary,
+  [data-color-mode="light"] .btn-secondary {
+    border: 2px solid !important;
+    font-weight: 600 !important;
+  }
+  
+  [data-color-mode="light"] .glassmorphism {
+    border: 2px solid rgba(0, 0, 0, 0.3) !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+  }
+}
