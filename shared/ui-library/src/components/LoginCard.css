@@ -1,0 +1,30 @@
+.login-card {
+  max-width: 400px;
+  width: 100%;
+  padding: 2.5rem 2rem;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(31,38,135,0.18);
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+.login-card input[type="email"],
+.login-card input[type="password"] {
+  width: 100%;
+}
+.login-card form {
+  width: 100%;
+}
+.login-card a {
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+.login-card a:hover {
+  color: #6366f1;
+}
+.login-card .ai-heading {
+  margin-bottom: 0.5rem;
+}

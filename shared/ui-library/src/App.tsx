@@ -1,14 +1,27 @@
 import React, { useState } from 'react'
 import { ThemeProvider, useTheme, AppTheme } from './themes/ThemeProvider'
-import { 
-  Button, 
-  Heading, 
-  Text, 
-  Input, 
-  Select, 
-  Badge, 
+import {
+  Button,
+  Heading,
+  Text,
+  Input,
+  Select,
+  Badge,
   Avatar,
-  Footer
+  Footer,
+  Header,
+  ChatbotWidget,
+  NotificationToasts,
+  AvatarCard,
+  AISearchBar,
+  AIModal,
+  AIProgressBar,
+  AILoader,
+  AITimeline,
+  AIDataTable,
+  LoginCard,
+  ToastType,
+  Toast
 } from './components/atoms'
 import './App.css'
 import './styles/ai-modern.css'
@@ -31,7 +44,9 @@ const ComponentShowcase: React.FC = () => {
   const { theme, setAppTheme, toggleColorMode } = useTheme();
   const [inputValue, setInputValue] = useState('');
   const [selectValue, setSelectValue] = useState('');
-
+  const [themeValue, setThemeValue] = useState(theme.appTheme);
+  const [currentPage, setCurrentPage] = useState('dashboard');
+  
   const selectOptions = [
     { value: 'option1', label: 'Option 1' },
     { value: 'option2', label: 'Option 2' },
@@ -39,8 +54,86 @@ const ComponentShowcase: React.FC = () => {
     { value: 'disabled', label: 'Disabled Option', disabled: true },
   ];
 
+  const themeOptions = [
+    { value: 'default', label: '🤖 Default' },
+    { value: 'travel', label: '✈️ Travel' },
+    { value: 'finance', label: '💰 Finance' },
+    { value: 'health', label: '🏥 Health' },
+    { value: 'day', label: '📅 Day' },
+  ];
+
+  const handleThemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newTheme = e.target.value as AppTheme;
+    setThemeValue(newTheme);
+    setAppTheme(newTheme);
+  };
+
+  // --- AI Demo Section State ---
+  const [modalOpen, setModalOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+  const [progress, setProgress] = useState(65);
+  const [loaderActive, setLoaderActive] = useState(true);
+  // Use ToastType enum for type property
+  const [toastList, setToastList] = useState<Toast[]>([
+    { id: 1, type: ToastType.Success, message: 'AI Model Training Complete!' },
+    { id: 2, type: ToastType.Info, message: 'New neural theme applied.' },
+    { id: 3, type: ToastType.Error, message: 'Connection lost. Reconnecting...' }
+  ]);
+  const timelineEvents = [
+    { id: 1, title: 'User Registered', timestamp: '2024-06-01', icon: 'user' },
+    { id: 2, title: 'AI Model Deployed', timestamp: '2024-06-02', icon: 'robot' },
+    { id: 3, title: 'First Plan Created', timestamp: '2024-06-03', icon: 'plan' }
+  ];
+  const tableData = [
+    { name: 'Aarya', role: 'AI Planner', status: 'Active' },
+    { name: 'John Doe', role: 'User', status: 'Trial' },
+    { name: 'Jane Smith', role: 'User', status: 'Active' }
+  ];
+  const tableColumns = [
+    { key: 'name', label: 'Name' },
+    { key: 'role', label: 'Role' },
+    { key: 'status', label: 'Status' }
+  ];
+
   return (
-    <div className="neural-network-bg particle-field" style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+    <div className="neural-network-bg particle-field" style={{ padding: '2rem', paddingTop: '6rem', maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+      {/* --- Header Component Demo --- */}
+      <ComponentSection title="Navigation Header">
+        <div style={{ width: '100%', marginBottom: '2rem' }}>
+          <Text size="sm" style={{ color: 'rgba(255, 255, 255, 0.7)', marginBottom: '1rem' }}>
+            Modern navigation header with glassmorphism effects, responsive design, and AI-powered search
+          </Text>
+          <div style={{ 
+            position: 'relative', 
+            height: '100px', 
+            borderRadius: '12px', 
+            overflow: 'hidden',
+            border: '1px solid rgba(255, 255, 255, 0.1)'
+          }}>
+            <Header
+              user={{
+                name: 'Aarya AI',
+                email: 'aarya@smartplanner.ai',
+                avatar: 'https://via.placeholder.com/40x40/0ea5e9/ffffff?text=AI'
+              }}
+              currentPage={currentPage}
+              onNavigate={setCurrentPage}
+              showSearch={true}
+              showNotifications={true}
+            />
+          </div>
+          <Text size="xs" style={{ color: 'rgba(255, 255, 255, 0.6)', marginTop: '0.5rem' }}>
+            Current Page: <strong>{currentPage}</strong> • Click navigation items to see active states
+          </Text>
+        </div>
+      </ComponentSection>
+
+      {/* --- Login Experience Card --- */}
+      <div style={{ display: 'grid', placeItems: 'center', minHeight: '60vh', width: '100%' }}>
+        <div style={{ width: '100%', maxWidth: '400px', margin: '0 auto' }}>
+          <LoginCard />
+        </div>
+      </div>
       {/* AI Neural Network Overlay */}
       <div className="neural-overlay">
         <svg className="neural-network-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
@@ -91,52 +184,62 @@ const ComponentShowcase: React.FC = () => {
           Next-Generation Component Development Playground
         </Text>
         
-        {/* AI Theme Controls */}
-        <div className="glassmorphism theme-controller" style={{ padding: '2rem', borderRadius: '16px', marginBottom: '2rem', maxWidth: '600px', margin: '0 auto 2rem auto' }}>
-          <Text size="lg" className="ai-text-gradient" style={{ textAlign: 'center', marginBottom: '1.5rem', fontWeight: '600' }}>
+        {/* AI Theme Controls - Compact Design */}
+        <div className="glassmorphism theme-controller" style={{ 
+          padding: '1.5rem', 
+          borderRadius: '16px', 
+          marginBottom: '2rem', 
+          maxWidth: '500px', 
+          margin: '0 auto 2rem auto' 
+        }}>
+          <Text size="lg" className="ai-text-gradient" style={{ 
+            textAlign: 'center', 
+            marginBottom: '1.5rem', 
+            fontWeight: '600' 
+          }}>
             🤖 AI Theme Controller
           </Text>
-          
-          {/* Mode Toggle - Make this more prominent */}
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginBottom: '1.5rem' }}>
-            <Button 
+
+          {/* Compact Layout: Toggle and Dropdown Side by Side */}
+          <div style={{ 
+            display: 'flex', 
+            gap: '1rem', 
+            alignItems: 'center', 
+            justifyContent: 'space-between',
+            marginBottom: '1rem' 
+          }}>
+            {/* Dark/Light Mode Toggle */}
+            <Button
               className={`ai-button theme-toggle-button ${theme.colorMode === 'dark' ? 'neural-gradient neural-glow' : 'cyber-gradient cyber-glow'}`}
               onClick={toggleColorMode}
+              size="sm"
+              style={{ flex: '0 0 auto' }}
             >
-              {theme.colorMode === 'light' ? '🌙' : '☀️'} 
-              {theme.colorMode === 'light' ? 'Switch to Dark' : 'Switch to Light'}
+              {theme.colorMode === 'light' ? '🌙 Dark' : '☀️ Light'}
             </Button>
-          </div>
-          
-          {/* Current Mode Display */}
-          <div className="theme-mode-display" style={{ textAlign: 'center', marginBottom: '1.5rem', padding: '1rem' }}>
-            <Text size="sm" style={{ color: 'rgba(255, 255, 255, 0.7)', marginBottom: '0.5rem' }}>
-              Current Theme Mode
-            </Text>
-            <Text size="lg" className="ai-text-gradient" style={{ fontWeight: '700', fontSize: '1.2rem' }}>
-              {theme.colorMode === 'light' ? '☀️ Light Mode' : '🌙 Dark Mode'}
-            </Text>
-          </div>
-          
-          {/* Theme Style Selection */}
-          <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-            <Text size="sm" style={{ color: 'rgba(255, 255, 255, 0.7)', marginBottom: '1rem' }}>
-              Choose AI Theme Style
-            </Text>
-          </div>
-          
-          <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            {(['default', 'travel', 'finance', 'health', 'day'] as AppTheme[]).map((themeType) => (
-              <Button
-                key={themeType}
-                className={`ai-button theme-style-button ${theme.appTheme === themeType ? 'matrix-gradient matrix-glow active' : 'glassmorphism'}`}
-                variant={theme.appTheme === themeType ? 'primary' : 'outline'}
+
+            {/* Theme Selection Dropdown */}
+            <div style={{ flex: '1', minWidth: '200px' }}>
+              <Select
+                options={themeOptions}
+                value={themeValue}
+                onChange={handleThemeChange}
                 size="sm"
-                onClick={() => setAppTheme(themeType)}
-              >
-                {themeType.charAt(0).toUpperCase() + themeType.slice(1)}
-              </Button>
-            ))}
+                placeholder="Choose theme..."
+              />
+            </div>
+          </div>
+
+          {/* Current Status Display */}
+          <div style={{ 
+            textAlign: 'center', 
+            padding: '0.75rem', 
+            backgroundColor: 'rgba(255, 255, 255, 0.05)',
+            borderRadius: '8px' 
+          }}>        
+            <Text size="sm" className="ai-text-gradient" style={{ fontWeight: '600' }}>
+              {theme.colorMode === 'light' ? '☀️' : '🌙'} {theme.colorMode.charAt(0).toUpperCase() + theme.colorMode.slice(1)} • {themeOptions.find(opt => opt.value === theme.appTheme)?.label || '🤖 Default'}
+            </Text>
           </div>
         </div>
       </header>
@@ -297,6 +400,48 @@ const ComponentShowcase: React.FC = () => {
               ? (theme.colors[theme.appTheme as keyof typeof theme.colors] as { primary: string }).primary
               : theme.colors.primary[600]
           }</Text>
+        </div>
+      </ComponentSection>
+
+      {/* --- AI Components Demo Section --- */}
+      <ComponentSection title="AI Components Demo">
+        {/* Notification Toasts */}
+        <NotificationToasts 
+          toasts={toastList}
+          removeToast={(id) => setToastList((prev) => prev.filter((t) => t.id !== id))}
+        />
+
+  {/* Avatar Card */}
+  <AvatarCard name="Aarya" avatarUrl="https://via.placeholder.com/80x80/0ea5e9/ffffff?text=AI" status="online" />
+
+  {/* AI Search Bar */}
+  <AISearchBar onSearch={(query) => setSearchValue(query)} />
+
+        {/* AI Modal */}
+        <Button onClick={() => setModalOpen(true)} variant="primary">Open AI Modal</Button>
+        <AIModal open={modalOpen} onClose={() => setModalOpen(false)} title="AI Modal Demo">
+          <Text>This is a demo of the AI-powered modal component.</Text>
+        </AIModal>
+
+        {/* AI Progress Bar */}
+        <AIProgressBar value={progress} max={100} />
+
+        {/* AI Loader */}
+        <AILoader />
+
+        {/* AI Timeline */}
+        <AITimeline steps={[
+          { id: 1, title: 'User Registered', timestamp: '2024-06-01', icon: 'user' },
+          { id: 2, title: 'AI Model Deployed', timestamp: '2024-06-02', icon: 'robot' },
+          { id: 3, title: 'First Plan Created', timestamp: '2024-06-03', icon: 'plan' }
+        ] as any} />
+
+        {/* AI Data Table */}
+        <AIDataTable columns={tableColumns} data={tableData} />
+
+        {/* Floating Chatbot Widget */}
+        <div style={{ position: 'fixed', bottom: 32, right: 32, zIndex: 1000 }}>
+          <ChatbotWidget />
         </div>
       </ComponentSection>
 

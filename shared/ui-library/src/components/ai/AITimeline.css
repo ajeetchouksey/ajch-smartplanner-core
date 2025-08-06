@@ -1,0 +1,39 @@
+.ai-timeline {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem 1.5rem;
+  border-radius: 1.2rem;
+  background: var(--ai-glass-bg);
+  box-shadow: 0 4px 24px var(--ai-neural-shadow);
+}
+.ai-timeline-step {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+.ai-timeline-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--ai-gradient-neural), var(--ai-gradient-cyber));
+  box-shadow: 0 2px 8px var(--ai-cyber-shadow);
+}
+.ai-timeline-step.completed .ai-timeline-dot {
+  background: #2ecc40;
+}
+.ai-timeline-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ai-cyber-purple);
+}
+.ai-timeline-line {
+  width: 40px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--ai-gradient-neural), var(--ai-gradient-cyber));
+  border-radius: 2px;
+  position: absolute;
+  left: 28px;
+  top: 7px;
+}

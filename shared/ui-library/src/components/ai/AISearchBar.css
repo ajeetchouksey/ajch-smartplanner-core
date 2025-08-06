@@ -1,0 +1,36 @@
+.ai-searchbar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: 1.2rem;
+  background: var(--ai-glass-bg);
+  box-shadow: 0 2px 8px var(--ai-neural-shadow);
+  width: 320px;
+}
+.ai-searchbar-input {
+  flex: 1;
+  border-radius: 0.8rem;
+  border: 1px solid var(--ai-neural-blue);
+  padding: 0.5rem 0.8rem;
+  font-size: 1rem;
+  background: var(--ai-glass-bg);
+  color: var(--ai-cyber-purple);
+}
+.ai-searchbar-btn {
+  background: var(--ai-gradient-cyber);
+  color: #fff;
+  border: none;
+  border-radius: 0.8rem;
+  padding: 0.5rem 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px var(--ai-cyber-shadow);
+  transition: background 0.2s;
+}
+.ai-searchbar-btn:hover {
+  background: var(--ai-gradient-neural);
+}
+.ai-searchbar-icon {
+  font-size: 1.2rem;
+}

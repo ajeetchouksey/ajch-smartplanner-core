@@ -1,0 +1,47 @@
+.ai-avatar-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-radius: 1.2rem;
+  background: var(--ai-glass-bg);
+  box-shadow: 0 4px 24px var(--ai-neural-shadow);
+  width: 320px;
+}
+.ai-avatar-ring {
+  border-radius: 50%;
+  padding: 4px;
+  background: linear-gradient(135deg, var(--ai-gradient-neural), var(--ai-gradient-cyber));
+  box-shadow: 0 2px 8px var(--ai-cyber-shadow);
+  position: relative;
+}
+.ai-avatar-ring.online {
+  box-shadow: 0 0 0 4px #2ecc40;
+}
+.ai-avatar-ring.offline {
+  box-shadow: 0 0 0 4px #e74c3c;
+}
+.ai-avatar-img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #fff;
+}
+.ai-avatar-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.ai-avatar-name {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--ai-cyber-purple);
+}
+.ai-avatar-status {
+  font-size: 0.95rem;
+  color: #2ecc40;
+}
+.ai-avatar-status.offline {
+  color: #e74c3c;
+}
