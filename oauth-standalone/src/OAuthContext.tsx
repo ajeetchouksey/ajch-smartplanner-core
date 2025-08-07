@@ -6,7 +6,7 @@ interface User {
   name: string;
   email: string;
   avatar?: string;
-  provider: 'microsoft' | 'google' | 'facebook';
+  provider: 'google' | 'github';
 }
 
 interface AuthState {
@@ -76,7 +76,8 @@ const initialState: AuthState = {
 // Context Types
 interface AuthContextType {
   state: AuthState;
-  loginWithOAuth: (provider: 'microsoft' | 'google' | 'facebook') => Promise<void>;
+  dispatch: React.Dispatch<AuthAction>;
+  loginWithOAuth: (provider: 'google' | 'github') => Promise<void>;
   logout: () => void;
   clearError: () => void;
 }
@@ -91,56 +92,110 @@ interface AuthProviderProps {
 
 // Mock OAuth URLs - In real implementation, these would be actual OAuth endpoints
 const OAUTH_URLS = {
-  microsoft: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
-  google: 'https://accounts.google.com/oauth/authorize',
-  facebook: 'https://www.facebook.com/v18.0/dialog/oauth',
+  google: 'https://accounts.google.com/oauth2/auth',
+  github: 'https://github.com/login/oauth/authorize',
 };
 
 // Auth Provider Component
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  const loginWithOAuth = async (provider: 'microsoft' | 'google' | 'facebook') => {
+  const loginWithOAuth = async (provider: 'google' | 'github') => {
     dispatch({ type: 'LOGIN_START' });
 
     try {
-      // Simulate realistic OAuth flow timing
-      await new Promise(resolve => setTimeout(resolve, 2000 + Math.random() * 1000));
-
-      // Simulate potential OAuth errors (5% chance)
-      if (Math.random() < 0.05) {
-        throw new Error(`Authentication with ${provider} was cancelled or failed. Please try again.`);
-      }
-
-      // Enhanced mock user data based on provider
-      const mockUsers = {
-        microsoft: {
-          id: `ms-${Date.now()}`,
-          name: 'Alex Johnson',
-          email: 'alex.johnson@outlook.com',
-          avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face&auto=format',
-          provider: 'microsoft' as const,
-        },
+      // Environment variables for OAuth configuration
+      const config = {
         google: {
-          id: `google-${Date.now()}`,
-          name: 'Sarah Chen',
-          email: 'sarah.chen@gmail.com',
-          avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face&auto=format',
-          provider: 'google' as const,
+          clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+          clientSecret: import.meta.env.VITE_GOOGLE_CLIENT_SECRET,
         },
-        facebook: {
-          id: `fb-${Date.now()}`,
-          name: 'Michael Rodriguez',
-          email: 'michael.rodriguez@facebook.com',
-          avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face&auto=format',
-          provider: 'facebook' as const,
-        },
+        github: {
+          clientId: import.meta.env.VITE_GITHUB_CLIENT_ID,
+          clientSecret: import.meta.env.VITE_GITHUB_CLIENT_SECRET,
+        }
       };
 
-      const user = mockUsers[provider];
-      dispatch({ type: 'LOGIN_SUCCESS', user });
+      const providerConfig = config[provider];
+      const hasRealCredentials = providerConfig.clientId && !providerConfig.clientId.includes('your_');
       
-      // Store authentication data securely
+      console.log(`🔐 OAuth Config for ${provider}:`, { 
+        clientId: providerConfig.clientId ? '✅ Set' : '❌ Missing',
+        hasRealCredentials,
+        willUseRealOAuth: hasRealCredentials
+      });
+      
+      if (hasRealCredentials) {
+        // REAL OAUTH FLOW
+        console.log(`🚀 Starting REAL OAuth flow with ${provider}`);
+        
+        const baseUrl = import.meta.env.VITE_APP_URL || 'http://localhost:3012';
+        
+        // OAuth URLs and parameters
+        const oauthParams = provider === 'google' ? {
+          authUrl: 'https://accounts.google.com/oauth2/auth',
+          params: new URLSearchParams({
+            client_id: providerConfig.clientId,
+            redirect_uri: `${baseUrl}/auth/google/callback`,
+            scope: 'openid email profile',
+            response_type: 'code',
+            access_type: 'offline',
+            prompt: 'consent'
+          })
+        } : {
+          authUrl: 'https://github.com/login/oauth/authorize',
+          params: new URLSearchParams({
+            client_id: providerConfig.clientId,
+            redirect_uri: `${baseUrl}/auth/github/callback`,
+            scope: 'user:email read:user',
+            state: Math.random().toString(36).substring(7)
+          })
+        };
+
+        const authUrl = `${oauthParams.authUrl}?${oauthParams.params.toString()}`;
+        
+        console.log(`🔗 Redirecting to ${provider} OAuth:`, authUrl);
+        
+        // Redirect to OAuth provider
+        window.location.href = authUrl;
+        
+        // Note: The actual token exchange will happen in the callback
+        // For now, we'll simulate success after redirect
+        return;
+        
+      } else {
+        // MOCK OAUTH FLOW (fallback for missing credentials)
+        console.log(`🧪 Using mock OAuth flow (no real credentials for ${provider})`);
+        
+        // Simulate realistic OAuth flow timing
+        await new Promise(resolve => setTimeout(resolve, 2000 + Math.random() * 1000));
+
+        // Simulate potential OAuth errors (5% chance)  
+        if (Math.random() < 0.05) {
+          throw new Error(`Authentication with ${provider} was cancelled or failed. Please try again.`);
+        }
+
+        // Mock user data for testing
+        const mockUsers = {
+          google: {
+            id: `google-${Date.now()}`,
+            name: 'Sarah Chen (Mock - Add Real Credentials)',
+            email: 'sarah.chen@gmail.com',
+            avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face&auto=format',
+            provider: 'google' as const,
+          },
+          github: {
+            id: `github-${Date.now()}`,
+            name: 'Alex Rodriguez (Mock - Add Real Credentials)',
+            email: 'alex.rodriguez@github.com',
+            avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face&auto=format',
+            provider: 'github' as const,
+          },
+        };
+
+        const user = mockUsers[provider];
+        dispatch({ type: 'LOGIN_SUCCESS', user });
+      }      // Store authentication data securely
       const authData = {
         user,
         timestamp: Date.now(),
@@ -185,6 +240,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const value: AuthContextType = {
     state,
+    dispatch,
     loginWithOAuth,
     logout,
     clearError,
