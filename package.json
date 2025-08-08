@@ -1,6 +1,6 @@
 {
   "name": "ajch-smartplanner-core",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/) \r [![Author: Ajeet Kumar Chouksey](https://img.shields.io/badge/Author-Ajeet%20Kumar%20Chouksey-blue)](mailto:ajeetkchouksey@users.noreply.github.com) \r [![GitHub Stars](https://img.shields.io/github/stars/ajeetkchouksey/ajch-smartplanner-core?style=social)](https://github.com/ajeetkchouksey/ajch-smartplanner-core/stargazers) \r [![GitHub Forks](https://img.shields.io/github/forks/ajeetkchouksey/ajch-smartplanner-core?style=social)](https://github.com/ajeetkchouksey/ajch-smartplanner-core/network/members)",
   "main": "index.js",
   "directories": {
