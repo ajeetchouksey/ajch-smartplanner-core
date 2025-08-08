@@ -20,7 +20,7 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      input: path.resolve(__dirname, './shared/ui-library/src/smartplanner.html')
+      input: path.resolve(__dirname, './shared/ui-library/smartplanner.html')
     }
   }
 })
