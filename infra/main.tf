@@ -51,6 +51,7 @@ locals {
 }
 
 # Main Resource Group
+# Deployment trigger: Ready for first infrastructure deployment!
 resource "azurerm_resource_group" "main" {
   name     = "rg-${local.resource_prefix}"
   location = local.location
