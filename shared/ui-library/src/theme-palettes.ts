@@ -1,0 +1,73 @@
+// 5 professional color palettes for theme switching
+export const themePalettes = [
+  {
+    name: 'Modern Blue-Purple',
+    colors: {
+      primary: '#667eea',
+      secondary: '#764ba2',
+      accent: '#4ade80',
+      info: '#06b6d4',
+      warning: '#f59e0b',
+      highlight: '#8b5cf6',
+      background: 'rgba(40,40,60,0.7)',
+      card: 'rgba(40,40,60,0.7)',
+      text: '#fff',
+    },
+  },
+  {
+    name: 'Emerald & Gold',
+    colors: {
+      primary: '#10b981',
+      secondary: '#f59e42',
+      accent: '#fbbf24',
+      info: '#f472b6',
+      warning: '#6366f1',
+      highlight: '#f3f4f6',
+      background: '#f3f4f6',
+      card: '#fff',
+      text: '#222',
+    },
+  },
+  {
+    name: 'Midnight & Neon',
+    colors: {
+      primary: '#0f172a',
+      secondary: '#38bdf8',
+      accent: '#f472b6',
+      info: '#facc15',
+      warning: '#a21caf',
+      highlight: '#22d3ee',
+      background: '#0f172a',
+      card: 'rgba(30,41,59,0.95)',
+      text: '#fff',
+    },
+  },
+  {
+    name: 'Classic Light',
+    colors: {
+      primary: '#f3f4f6',
+      secondary: '#e5e7eb',
+      accent: '#6366f1',
+      info: '#f59e42',
+      warning: '#10b981',
+      highlight: '#111827',
+      background: '#f3f4f6',
+      card: '#fff',
+      text: '#222',
+    },
+  },
+  {
+    name: 'Solarized',
+    colors: {
+      primary: '#002b36',
+      secondary: '#268bd2',
+      accent: '#b58900',
+      info: '#2aa198',
+      warning: '#859900',
+      highlight: '#fdf6e3',
+      background: '#002b36',
+      card: '#073642',
+      text: '#fdf6e3',
+    },
+  },
+];

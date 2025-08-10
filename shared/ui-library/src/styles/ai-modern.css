@@ -24,10 +24,10 @@
   --glass-border-dark: rgba(255, 255, 255, 0.1);
   --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   
-  /* Neural Animations */
-  --neural-pulse-duration: 3s;
-  --float-duration: 6s;
-  --gradient-shift-duration: 8s;
+  /* Neural Animations - Ultra zen-like, barely perceptible */
+  --neural-pulse-duration: 60s;
+  --float-duration: 90s;
+  --gradient-shift-duration: 120s;
 }
 
 /* AI-Powered Keyframe Animations */
@@ -179,7 +179,7 @@
 }
 
 .particle-effect {
-  animation: particleFloat 4s linear infinite;
+  animation: particleFloat 80s linear infinite;
 }
 
 .holographic {
@@ -190,7 +190,7 @@
     transparent 100%
   );
   background-size: 200% 100%;
-  animation: holographicShimmer 2s linear infinite;
+  animation: holographicShimmer 45s linear infinite;
 }
 
 .neural-glow {
@@ -215,7 +215,7 @@
     radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
     radial-gradient(circle at 40% 40%, rgba(120, 219, 226, 0.3) 0%, transparent 50%);
   background-size: 100% 100%, 80% 80%, 60% 60%;
-  animation: gradientShift 10s ease infinite;
+  animation: gradientShift 100s ease infinite;
 }
 
 .particle-field {
@@ -237,7 +237,7 @@
     radial-gradient(1px 1px at 130px 80px, rgba(120, 219, 226, 0.3), transparent);
   background-repeat: repeat;
   background-size: 150px 100px;
-  animation: particleFloat 20s linear infinite;
+  animation: particleFloat 150s linear infinite;
   pointer-events: none;
 }
 
@@ -538,11 +538,11 @@
 
 .footer-neural-connections line {
   stroke-dasharray: 3 3;
-  animation: neuralNetwork 6s ease-in-out infinite;
+  animation: neuralNetwork 75s ease-in-out infinite;
 }
 
 .footer-neural-nodes circle {
-  animation: neuralPulse 4s ease-in-out infinite;
+  animation: neuralPulse 60s ease-in-out infinite;
 }
 
 .footer-content {
