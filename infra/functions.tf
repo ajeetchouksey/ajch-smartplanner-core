@@ -75,7 +75,9 @@ resource "azurerm_linux_function_app" "main" {
       # Application configuration
       "ENVIRONMENT"                  = var.environment
       "APP_NAME"                    = "SmartPlanner"
-      "LOG_LEVEL"                   = var.environment == "prod" ? "warn" : "debug"    # Database configuration
+      "LOG_LEVEL"                   = var.environment == "prod" ? "warn" : "debug"
+
+      # Database configuration
     "COSMOS_DB_ENDPOINT"          = azurerm_cosmosdb_account.main.endpoint
     "COSMOS_DB_KEY"               = "@Microsoft.KeyVault(VaultName=${azurerm_key_vault.main.name};SecretName=cosmos-db-key)"
     "COSMOS_DB_DATABASE_NAME"     = azurerm_cosmosdb_sql_database.main.name
