@@ -11,6 +11,9 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'src/smartplanner.html'),
+        travel: resolve(__dirname, 'src/travel.html'),
+        finance: resolve(__dirname, 'src/finance.html'),
+        day: resolve(__dirname, 'src/day.html'),
       },
     },
   },
