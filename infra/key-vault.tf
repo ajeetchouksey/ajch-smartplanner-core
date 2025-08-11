@@ -161,7 +161,7 @@ resource "azurerm_key_vault_secret" "jwt_secret" {
 # Database connection string
 resource "azurerm_key_vault_secret" "cosmos_connection_string" {
   name         = "COSMOS-CONNECTION-STRING"
-  value        = azurerm_cosmosdb_account.main.connection_strings[0]
+  value        = azurerm_cosmosdb_account.main.primary_sql_connection_string
   key_vault_id = azurerm_key_vault.main.id
   
   depends_on = [azurerm_key_vault_access_policy.deployer]
