@@ -1,13 +1,13 @@
 # Static Web App Outputs
 output "static_web_app_url" {
   description = "The default URL of the static web app"
-  value       = azurerm_static_site.main.default_host_name
+  value       = azurerm_static_web_app.main.default_host_name
   sensitive   = false
 }
 
 output "static_web_app_custom_domain" {
   description = "The custom domain URL (if configured)"
-  value       = var.custom_domain != "" ? var.custom_domain : azurerm_static_site.main.default_host_name
+  value       = var.custom_domain != "" ? var.custom_domain : azurerm_static_web_app.main.default_host_name
   sensitive   = false
 }
 
@@ -135,7 +135,7 @@ output "app_configuration" {
 
     # Frontend Configuration
     frontend = {
-      url           = var.custom_domain != "" ? "https://${var.custom_domain}" : "https://${azurerm_static_site.main.default_host_name}"
+      url           = var.custom_domain != "" ? "https://${var.custom_domain}" : "https://${azurerm_static_web_app.main.default_host_name}"
       custom_domain = var.custom_domain
     }
 

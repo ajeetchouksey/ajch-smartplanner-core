@@ -225,7 +225,7 @@ resource "azurerm_consumption_budget_resource_group" "main" {
 # Application Insights Workbook for monitoring dashboard
 resource "azurerm_application_insights_workbook" "main" {
   count               = var.enable_monitoring ? 1 : 0
-  name                = "workbook--"
+  name                = "00000000-0000-0000-0000-000000000001"
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
   display_name        = "SmartPlanner Monitoring Dashboard"

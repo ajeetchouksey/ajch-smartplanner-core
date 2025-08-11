@@ -34,29 +34,29 @@ resource "azurerm_storage_account" "files" {
 
 # Container for user uploads
 resource "azurerm_storage_container" "user_uploads" {
-  name                  = "user-uploads"
-  storage_account_id    = azurerm_storage_account.files.id
+  name                 = "user-uploads"
+  storage_account_name = azurerm_storage_account.files.name
   container_access_type = "private"
 }
 
 # Container for user avatars
 resource "azurerm_storage_container" "avatars" {
-  name                  = "avatars"
-  storage_account_id    = azurerm_storage_account.files.id
+  name                 = "avatars"
+  storage_account_name = azurerm_storage_account.files.name
   container_access_type = "blob" # Public read for avatars
 }
 
 # Container for plan attachments
 resource "azurerm_storage_container" "plan_attachments" {
-  name                  = "plan-attachments"
-  storage_account_id    = azurerm_storage_account.files.id
+  name                 = "plan-attachments"
+  storage_account_name = azurerm_storage_account.files.name
   container_access_type = "private"
 }
 
 # Container for exports
 resource "azurerm_storage_container" "exports" {
-  name                  = "exports"
-  storage_account_id    = azurerm_storage_account.files.id
+  name                 = "exports"
+  storage_account_name = azurerm_storage_account.files.name
   container_access_type = "private"
 }
 

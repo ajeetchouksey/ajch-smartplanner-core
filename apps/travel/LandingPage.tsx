@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { WelcomeBot } from "../../shared/ui-library/src/components/WelcomeBot";
 import { TopMenu } from "../../shared/ui-library/src/components/TopMenu";
@@ -56,3 +55,6 @@ export default function TravelLandingPage() {
     </>
   );
 }
+
+// npx vite --config vite.smartplanner.config.ts
+http://localhost:3001/smartplanner.html

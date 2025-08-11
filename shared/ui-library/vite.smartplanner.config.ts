@@ -9,12 +9,7 @@ export default defineConfig({
     outDir: '../dist-smartplanner',
     emptyOutDir: true,
     rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'src/smartplanner.html'),
-        travel: resolve(__dirname, 'src/travel.html'),
-        finance: resolve(__dirname, 'src/finance.html'),
-        day: resolve(__dirname, 'src/day.html'),
-      },
+      input: resolve(__dirname, 'src/smartplanner.html'),
     },
   },
   server: {
