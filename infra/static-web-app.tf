@@ -5,7 +5,7 @@ resource "azurerm_static_site" "main" {
   location            = "East US 2" # Static Web Apps have limited region availability
   sku_tier            = "Free"
   sku_size            = "Free"
-  
+
   tags = local.common_tags
 }
 

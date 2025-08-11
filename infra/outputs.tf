@@ -126,65 +126,65 @@ output "app_configuration" {
   description = "Complete configuration object for the application"
   value = {
     environment = var.environment
-    
+
     # API Configuration
     api = {
-      base_url        = "https://${azurerm_linux_function_app.main.default_hostname}"
+      base_url          = "https://${azurerm_linux_function_app.main.default_hostname}"
       function_app_name = azurerm_linux_function_app.main.name
     }
-    
+
     # Frontend Configuration
     frontend = {
       url           = var.custom_domain != "" ? "https://${var.custom_domain}" : "https://${azurerm_static_site.main.default_host_name}"
       custom_domain = var.custom_domain
     }
-    
+
     # OAuth Configuration
     oauth = {
       redirect_uris = var.oauth_redirect_uris[var.environment]
       cors_origins  = var.allowed_cors_origins[var.environment]
     }
-    
+
     # Storage Configuration
     storage = {
-      account_name    = azurerm_storage_account.files.name
-      blob_endpoint   = azurerm_storage_account.files.primary_blob_endpoint
+      account_name  = azurerm_storage_account.files.name
+      blob_endpoint = azurerm_storage_account.files.primary_blob_endpoint
       containers = {
-        user_uploads    = azurerm_storage_container.user_uploads.name
-        avatars         = azurerm_storage_container.avatars.name
+        user_uploads     = azurerm_storage_container.user_uploads.name
+        avatars          = azurerm_storage_container.avatars.name
         plan_attachments = azurerm_storage_container.plan_attachments.name
-        exports         = azurerm_storage_container.exports.name
+        exports          = azurerm_storage_container.exports.name
       }
     }
-    
+
     # Database Configuration
     database = {
       account_name = azurerm_cosmosdb_account.main.name
       endpoint     = azurerm_cosmosdb_account.main.endpoint
       containers = {
-        users      = azurerm_cosmosdb_sql_container.users.name
-        plans      = azurerm_cosmosdb_sql_container.plans.name
-        analytics  = azurerm_cosmosdb_sql_container.analytics.name
-        sessions   = azurerm_cosmosdb_sql_container.sessions.name
+        users     = azurerm_cosmosdb_sql_container.users.name
+        plans     = azurerm_cosmosdb_sql_container.plans.name
+        analytics = azurerm_cosmosdb_sql_container.analytics.name
+        sessions  = azurerm_cosmosdb_sql_container.sessions.name
       }
     }
-    
+
     # Security Configuration
     security = {
       key_vault_name = azurerm_key_vault.main.name
       key_vault_uri  = azurerm_key_vault.main.vault_uri
     }
-    
+
     # Monitoring Configuration
     monitoring = var.enable_monitoring ? {
       application_insights = {
-        name               = azurerm_application_insights.main[0].name
-        app_id            = azurerm_application_insights.main[0].app_id
+        name                = azurerm_application_insights.main[0].name
+        app_id              = azurerm_application_insights.main[0].app_id
         instrumentation_key = azurerm_application_insights.main[0].instrumentation_key
-        connection_string  = azurerm_application_insights.main[0].connection_string
+        connection_string   = azurerm_application_insights.main[0].connection_string
       }
       log_analytics = {
-        workspace_id = azurerm_log_analytics_workspace.main.id
+        workspace_id   = azurerm_log_analytics_workspace.main.id
         workspace_name = azurerm_log_analytics_workspace.main.name
       }
     } : null

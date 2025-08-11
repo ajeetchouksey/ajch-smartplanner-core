@@ -3,7 +3,7 @@ variable "environment" {
   description = "Environment name (dev, staging, prod)"
   type        = string
   default     = "dev"
-  
+
   validation {
     condition     = contains(["dev", "staging", "prod"], var.environment)
     error_message = "Environment must be dev, staging, or prod."
@@ -50,7 +50,7 @@ variable "allowed_cors_origins" {
   default = {
     dev = [
       "http://localhost:3000",
-      "http://localhost:3001", 
+      "http://localhost:3001",
       "http://localhost:3003"
     ]
     staging = [
@@ -73,14 +73,14 @@ variable "enable_monitoring" {
 variable "cosmos_db_throughput" {
   description = "Cosmos DB throughput (RU/s)"
   type        = number
-  default     = 400  # Free tier
+  default     = 400 # Free tier
 }
 
 variable "storage_account_tier" {
   description = "Storage account performance tier"
   type        = string
   default     = "Standard"
-  
+
   validation {
     condition     = contains(["Standard", "Premium"], var.storage_account_tier)
     error_message = "Storage tier must be Standard or Premium."

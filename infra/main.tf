@@ -1,13 +1,13 @@
 terraform {
   required_version = ">= 1.0"
-  
+
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
       version = "~> 3.0"
     }
   }
-  
+
   # Remote state storage (optional for MVP)
   backend "azurerm" {
     resource_group_name  = "rg-smartplanner-terraform"
@@ -24,7 +24,7 @@ provider "azurerm" {
       purge_soft_delete_on_destroy    = true
       recover_soft_deleted_key_vaults = true
     }
-    
+
     resource_group {
       prevent_deletion_if_contains_resources = false
     }
@@ -36,17 +36,17 @@ locals {
   project_name = "smartplanner"
   environment  = var.environment
   location     = var.location
-  
+
   # Resource naming convention
   resource_prefix = "${local.project_name}-${local.environment}"
-  
+
   common_tags = {
-    Project      = "SmartPlanner"
-    Environment  = local.environment
-    ManagedBy    = "Terraform"
-    Repository   = "ajch-smartplanner-core"
-    Owner        = "ajeet.chouksey"
-    CreatedDate  = timestamp()
+    Project     = "SmartPlanner"
+    Environment = local.environment
+    ManagedBy   = "Terraform"
+    Repository  = "ajch-smartplanner-core"
+    Owner       = "ajeet.chouksey"
+    CreatedDate = timestamp()
   }
 }
 
