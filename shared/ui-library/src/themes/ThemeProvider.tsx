@@ -108,3 +108,5 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     </ThemeContext.Provider>
   );
 };
+
+export default ThemeProvider;

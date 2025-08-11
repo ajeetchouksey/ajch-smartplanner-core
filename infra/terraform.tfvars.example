@@ -1,0 +1,109 @@
+# ==============================================================================
+# SmartPlanner Infrastructure Configuration
+# ==============================================================================
+# Copy this file to terraform.tfvars and update the values for your environment
+# Note: terraform.tfvars should be added to .gitignore to keep secrets secure
+
+# Environment Configuration
+environment = "dev"  # Options: dev, staging, prod
+location    = "East US"  # Azure region
+
+# Domain Configuration (Optional)
+# custom_domain = "smartplanner.example.com"  # Leave empty for default Azure domains
+
+# OAuth Configuration (Required for authentication)
+# These secrets should be set via GitHub Secrets or Azure Key Vault for production
+microsoft_client_id     = ""  # Microsoft OAuth Client ID
+microsoft_client_secret = ""  # Microsoft OAuth Client Secret
+google_client_id        = ""  # Google OAuth Client ID  
+google_client_secret    = ""  # Google OAuth Client Secret
+facebook_app_id         = ""  # Facebook App ID
+facebook_app_secret     = ""  # Facebook App Secret
+jwt_secret             = ""  # JWT signing secret (generate a secure random string)
+
+# OAuth Redirect URIs (Environment-specific)
+oauth_redirect_uris = {
+  dev = [
+    "http://localhost:3000/auth/callback",
+    "http://localhost:3001/auth/callback", 
+    "http://localhost:3003/auth/callback"
+  ]
+  staging = [
+    "https://smartplanner-staging.azurestaticapps.net/auth/callback"
+  ]
+  prod = [
+    "https://smartplanner.app/auth/callback",
+    "https://app.smartplanner.com/auth/callback"
+  ]
+}
+
+# CORS Origins (Environment-specific)
+allowed_cors_origins = {
+  dev = [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "http://localhost:3003"
+  ]
+  staging = [
+    "https://smartplanner-staging.azurestaticapps.net"
+  ]
+  prod = [
+    "https://smartplanner.app",
+    "https://app.smartplanner.com"
+  ]
+}
+
+# Cost Control Settings
+enable_monitoring        = true   # Set to false to disable Application Insights
+cosmos_db_throughput    = 400    # Free tier: 400 RU/s
+storage_account_tier    = "Standard"  # Options: Standard, Premium
+
+# ==============================================================================
+# OAuth Provider Setup Instructions
+# ==============================================================================
+
+# Microsoft OAuth Setup:
+# 1. Go to https://portal.azure.com
+# 2. Navigate to Azure Active Directory > App registrations
+# 3. Click "New registration"
+# 4. Set redirect URIs based on your environment
+# 5. Copy Client ID and create a Client Secret
+
+# Google OAuth Setup:
+# 1. Go to https://console.developers.google.com
+# 2. Create a new project or select existing
+# 3. Enable Google+ API
+# 4. Create OAuth 2.0 credentials
+# 5. Set authorized redirect URIs
+
+# Facebook OAuth Setup:
+# 1. Go to https://developers.facebook.com
+# 2. Create a new app
+# 3. Add Facebook Login product
+# 4. Set Valid OAuth Redirect URIs
+# 5. Copy App ID and App Secret
+
+# JWT Secret Generation:
+# Generate a secure random string (minimum 32 characters)
+# Example command: openssl rand -base64 32
+
+# ==============================================================================
+# Deployment Notes
+# ==============================================================================
+
+# For Development:
+# - Use localhost URLs for redirect URIs and CORS origins
+# - OAuth secrets can be set in terraform.tfvars
+# - Enable monitoring for testing
+
+# For Production:
+# - Use HTTPS URLs only
+# - Store OAuth secrets in GitHub Secrets or Azure Key Vault
+# - Consider setting up custom domain
+# - Review cost settings and monitoring alerts
+
+# Security Recommendations:
+# - Never commit terraform.tfvars to version control
+# - Use GitHub Secrets for CI/CD deployments
+# - Rotate OAuth secrets regularly
+# - Enable Key Vault purge protection in production

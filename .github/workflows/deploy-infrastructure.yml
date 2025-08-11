@@ -1,0 +1,252 @@
+name: Deploy Infrastructure
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'infra/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'infra/**'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - staging
+          - prod
+
+env:
+  TF_VERSION: '1.9.5'
+  ARM_USE_OIDC: true
+
+jobs:
+  validate:
+    name: Validate Terraform
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - name: Terraform Format Check
+        run: terraform fmt -check -recursive
+        working-directory: ./infra
+
+      - name: Terraform Init
+        run: terraform init -backend=false
+        working-directory: ./infra
+
+      - name: Terraform Validate
+        run: terraform validate
+        working-directory: ./infra
+
+  plan:
+    name: Plan Infrastructure
+    runs-on: ubuntu-latest
+    needs: validate
+    if: github.event_name == 'pull_request'
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Terraform Init
+        run: |
+          terraform init \
+            -backend-config="storage_account_name=${{ vars.TF_STATE_STORAGE_ACCOUNT }}" \
+            -backend-config="container_name=tfstate" \
+            -backend-config="key=smartplanner-dev.tfstate" \
+            -backend-config="resource_group_name=${{ vars.TF_STATE_RESOURCE_GROUP }}"
+        working-directory: ./infra
+
+      - name: Terraform Plan
+        run: |
+          terraform plan \
+            -var="environment=dev" \
+            -var="microsoft_client_id=${{ secrets.GH_CLIENT_ID }}" \
+            -var="microsoft_client_secret=${{ secrets.GH_CLIENT_SECRET }}" \
+            -var="google_client_id=${{ secrets.GOOGLE_CLIENT_ID }}" \
+            -var="google_client_secret=${{ secrets.GOOGLE_CLIENT_SECRET }}" \
+            -var="facebook_app_id=dummy" \
+            -var="facebook_app_secret=dummy" \
+            -var="jwt_secret=dummy-secret-key"
+        working-directory: ./infra
+
+  deploy-dev:
+    name: Deploy to Development
+    runs-on: ubuntu-latest
+    needs: validate
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    environment: dev
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+          terraform_wrapper: false
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Terraform Init
+        run: |
+          terraform init \
+            -backend-config="storage_account_name=${{ vars.TF_STATE_STORAGE_ACCOUNT }}" \
+            -backend-config="container_name=tfstate" \
+            -backend-config="key=smartplanner-dev.tfstate" \
+            -backend-config="resource_group_name=${{ vars.TF_STATE_RESOURCE_GROUP }}"
+        working-directory: ./infra
+
+      - name: Terraform Apply
+        run: |
+          terraform apply -auto-approve \
+            -var="environment=dev" \
+            -var="microsoft_client_id=${{ secrets.GH_CLIENT_ID }}" \
+            -var="microsoft_client_secret=${{ secrets.GH_CLIENT_SECRET }}" \
+            -var="google_client_id=${{ secrets.GOOGLE_CLIENT_ID }}" \
+            -var="google_client_secret=${{ secrets.GOOGLE_CLIENT_SECRET }}" \
+            -var="facebook_app_id=dummy" \
+            -var="facebook_app_secret=dummy" \
+            -var="jwt_secret=dummy-secret-key"
+        working-directory: ./infra
+
+      - name: Output URLs
+        run: |
+          echo "Static Web App URL: $(terraform output -raw static_web_app_url)"
+          echo "Function App Name: $(terraform output -raw function_app_name)"
+        working-directory: ./infra
+
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: deploy-dev
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    environment: staging
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+          terraform_wrapper: false
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Terraform Init
+        run: |
+          terraform init \
+            -backend-config="storage_account_name=${{ vars.TF_STATE_STORAGE_ACCOUNT }}" \
+            -backend-config="container_name=tfstate" \
+            -backend-config="key=smartplanner-staging.tfstate" \
+            -backend-config="resource_group_name=${{ vars.TF_STATE_RESOURCE_GROUP }}"
+        working-directory: ./infra
+
+      - name: Terraform Apply
+        run: |
+          terraform apply -auto-approve \
+            -var="environment=staging" \
+            -var="microsoft_client_id=${{ secrets.GH_CLIENT_ID }}" \
+            -var="microsoft_client_secret=${{ secrets.GH_CLIENT_SECRET }}" \
+            -var="google_client_id=${{ secrets.GOOGLE_CLIENT_ID }}" \
+            -var="google_client_secret=${{ secrets.GOOGLE_CLIENT_SECRET }}" \
+            -var="facebook_app_id=dummy" \
+            -var="facebook_app_secret=dummy" \
+            -var="jwt_secret=dummy-secret-key"
+        working-directory: ./infra
+
+  deploy-prod:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: deploy-staging
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    environment: prod
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+          terraform_wrapper: false
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Terraform Init
+        run: |
+          terraform init \
+            -backend-config="storage_account_name=${{ vars.TF_STATE_STORAGE_ACCOUNT }}" \
+            -backend-config="container_name=tfstate" \
+            -backend-config="key=smartplanner-prod.tfstate" \
+            -backend-config="resource_group_name=${{ vars.TF_STATE_RESOURCE_GROUP }}"
+        working-directory: ./infra
+
+      - name: Terraform Apply
+        run: |
+          terraform apply -auto-approve \
+            -var="environment=prod" \
+            -var="enable_monitoring=true" \
+            -var="microsoft_client_id=${{ secrets.GH_CLIENT_ID }}" \
+            -var="microsoft_client_secret=${{ secrets.GH_CLIENT_SECRET }}" \
+            -var="google_client_id=${{ secrets.GOOGLE_CLIENT_ID }}" \
+            -var="google_client_secret=${{ secrets.GOOGLE_CLIENT_SECRET }}" \
+            -var="facebook_app_id=dummy" \
+            -var="facebook_app_secret=dummy" \
+            -var="jwt_secret=dummy-secret-key"
+        working-directory: ./infra
+
+      - name: Health Check
+        run: |
+          APP_URL=$(terraform output -raw static_web_app_url)
+          echo "Checking application health: https://$APP_URL"
+          sleep 30
+          curl -f -s --max-time 30 "https://$APP_URL" || echo "Health check failed"
+        working-directory: ./infra
