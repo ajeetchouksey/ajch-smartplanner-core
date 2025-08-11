@@ -73,13 +73,12 @@ resource "azurerm_linux_function_app" "main" {
     "InstrumentationEngine_EXTENSION_VERSION"    = var.enable_monitoring ? "disabled" : "disabled" # Disabled for cost optimization
 
     # Application configuration
-    "ENVIRONMENT"             = var.environment
-    "APP_NAME"                = "SmartPlanner"
-    "LOG_LEVEL"               = var.environment == "prod" ? "warn" : "debug" # Database configuration
-    "COSMOS_DB_ENDPOINT"      = azurerm_cosmosdb_account.main.endpoint
-    "COSMOS_DB_KEY"           = "@Microsoft.KeyVault(VaultName=${azurerm_key_vault.main.name};SecretName=cosmos-db-key)"
-    "COSMOS_DB_DATABASE_NAME" = azurerm_cosmosdb_sql_database.main.name
-
+  "ENVIRONMENT"             = var.environment
+  "APP_NAME"                = "SmartPlanner"
+  "LOG_LEVEL"               = var.environment == "prod" ? "warn" : "debug"
+  "COSMOS_DB_ENDPOINT"      = azurerm_cosmosdb_account.main.endpoint
+  "COSMOS_DB_KEY"           = "@Microsoft.KeyVault(VaultName=${azurerm_key_vault.main.name};SecretName=cosmos-db-key)"
+  "COSMOS_DB_DATABASE_NAME" = azurerm_cosmosdb_sql_database.main.name
     # Storage configuration
     "STORAGE_ACCOUNT_NAME" = azurerm_storage_account.files.name
     "STORAGE_ACCOUNT_KEY"  = "@Microsoft.KeyVault(VaultName=${azurerm_key_vault.main.name};SecretName=storage-account-key)"

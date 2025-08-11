@@ -142,24 +142,27 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
         </div>
       </div>
 
-      {/* AI Disclaimer Footer */}
-      <footer style={{
-        position: "fixed",
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: "rgba(24,28,47,0.95)",
-        color: "#fff",
-        textAlign: "center",
-        padding: "10px 0",
-        fontSize: "0.95rem",
-        zIndex: 100,
-        boxShadow: "0 -2px 8px rgba(0,0,0,0.08)"
-      }}>
+      {/* AI Disclaimer Banner */}
+      <aside
+        style={{
+          position: "fixed",
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: "rgba(24,28,47,0.95)",
+          color: "#fff",
+          textAlign: "center",
+          padding: "10px 0",
+          fontSize: "0.95rem",
+          zIndex: 100,
+          boxShadow: "0 -2px 8px rgba(0,0,0,0.08)"
+        }}
+        aria-label="AI Disclaimer"
+      >
         <span style={{ opacity: 0.85 }}>
           AI Disclaimer: This application uses AI to assist with planning and recommendations. Please verify all important information independently. We are committed to responsible AI and ethical use.
         </span>
-      </footer>
+      </aside>
     </footer>
   );
 };
