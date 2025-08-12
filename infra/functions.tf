@@ -1,4 +1,5 @@
 # Storage Account for Azure Functions
+
 resource "azurerm_storage_account" "functions" {
   name                     = "stfunc${local.project_name}${local.environment}"
   resource_group_name      = azurerm_resource_group.main.name
