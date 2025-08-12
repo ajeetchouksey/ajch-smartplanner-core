@@ -27,12 +27,78 @@ This document outlines the architecture, technology stack, and implementation pl
 
 ## 2. Technology Stack
 
+
 - **Frontend:** React (existing, shared/ui-library)
 - **Backend API:** Python (FastAPI or Flask)
-- **AI/NLP:** Azure OpenAI, OpenAI API, or HuggingFace Transformers
+- **AI/NLP:**
+    - Azure AI Foundry (Azure AI Studio) [Recommended for enterprise, supports GPT-4, Llama, etc.]
+    - Azure OpenAI Service
+    - OpenAI API
+    - HuggingFace Transformers
 - **Context Storage:** Azure Cosmos DB (user/session context), Redis (optional for fast session state)
 - **Authentication:** OAuth/JWT (existing)
 - **Deployment:** Azure Functions (Python), Azure App Service, or Docker container
+---
+
+## 10. Using Azure AI Foundry (Azure AI Studio) for LLM Integration
+
+### Overview
+Azure AI Foundry (now part of Azure AI Studio) allows you to deploy and use large language models (LLMs) like GPT-4, Llama, and more, with enterprise security, compliance, and integration with other Azure services.
+
+### Steps to Integrate Azure AI Foundry
+
+#### 1. Prerequisites
+- Azure account (free or paid)
+- Contributor access to an Azure subscription
+
+#### 2. Deploy a Model in Azure AI Studio/Foundry
+1. Go to [Azure AI Studio](https://ai.azure.com/) or search for "Azure AI Studio" in the Azure Portal.
+2. Create a new Project or Foundry Workspace.
+3. Deploy a model (e.g., GPT-4, Llama, or other available LLMs).
+   - Choose a model, give your deployment a name, and select a pricing tier.
+   - Wait for deployment to complete.
+
+#### 3. Get Your Endpoint and API Key
+- In your deployed model’s overview, find the “Endpoint” URL.
+- Go to “Keys and Endpoint” to get your API key.
+
+#### 4. Call the Model from Python
+Install the requests library if you haven’t:
+```
+pip install requests
+```
+
+Example code to call your Azure Foundry model:
+```python
+import requests
+import os
+
+endpoint = os.getenv("AZURE_FOUNDRY_ENDPOINT")  # e.g., "https://<your-resource>.openai.azure.com/openai/deployments/<deployment-name>/chat/completions?api-version=2024-02-15-preview"
+api_key = os.getenv("AZURE_FOUNDRY_KEY")
+
+def call_azure_foundry(prompt):
+    headers = {
+        "api-key": api_key,
+        "Content-Type": "application/json"
+    }
+    data = {
+        "messages": [
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": prompt}
+        ]
+    }
+    response = requests.post(endpoint, headers=headers, json=data)
+    return response.json()["choices"][0]["message"]["content"]
+```
+
+#### 5. Integrate with Your FastAPI /chat Endpoint
+Call `call_azure_foundry()` inside your `/chat` endpoint and return the result.
+
+#### 6. Learn More
+- [Azure AI Studio Documentation](https://learn.microsoft.com/en-us/azure/ai-studio/)
+- [Azure OpenAI Service Quickstart](https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart)
+
+---
 
 ---
 
@@ -98,7 +164,7 @@ This document outlines the architecture, technology stack, and implementation pl
 - Log all interactions for analytics and debugging.
 - Monitor usage and performance.
 
----
+---python -m venv venv
 
 ## 5. Advanced Context Handling (Recommended)
 - Use a context manager class in Python to merge frontend context, user profile, and recent history.
